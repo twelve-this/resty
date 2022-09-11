@@ -1,0 +1,19 @@
+global_headers:
+  header1: header1_value
+  header2: header2_value
+  header3: header3_value
+endpoints:
+  get_issue_by_key:
+    url: /rest/api/2/issue/{key}
+    verb: GET
+    additional_headers: null
+    remove_global_headers: null
+    path_parameters: null
+    query_parameters: null
+  create_issue:
+    url: /rest/api/2/issue
+    verb: POST
+    additional_headers: null
+    remove_global_headers: null
+    path_parameters: null
+    query_parameters: null

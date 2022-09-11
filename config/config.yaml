@@ -1,0 +1,26 @@
+---
+endpoints:
+  - name: endpoint1
+    url: asdf
+    params:
+      - param1
+      - param2
+      - param3
+    method: POST
+    headers: null
+    body: null
+  - name: endpoint2
+    url: asdf
+    params:
+      - param1
+      - param2
+      - param3
+    headers: null
+    method: POST
+    body: null
+actions:
+  migrate: do_migrate
+  get_test_execution_data: do_get_test_exeuction_data
+paths:
+  output: output_path
+  input: input_path

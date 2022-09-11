@@ -1,0 +1,39 @@
+#{
+#   "fields": {
+#       "project":
+#       {
+#          "key": "TEST"
+#       },
+#       "summary": "Who seeks a faultless friend RESTs friendless.",
+#       "description": "Creating an issue and setting time tracking fields",
+#       "issuetype": {
+#          "name": "Bug"
+#        },
+#        "timetracking":
+#        {
+#           "originalEstimate": "1d 2h",
+#           "remainingEstimate": "3h 25m"
+#        }
+#    }
+#}
+definitions:
+  project_definition:
+    key: string
+  issuetype_definition:
+    name: string
+
+create_ticket:
+  specification:
+    body:
+      name: CreateTicket
+      fields:
+        type: object
+        properties:
+          #project: ${definitions.project_definition}
+          summary:
+            type: string
+          description:
+            type: string
+          #issuetype: ${definitions.issuetype_definition}
+          id:
+            type: integer
