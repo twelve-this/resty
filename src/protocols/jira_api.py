@@ -2,7 +2,6 @@ from typing import Protocol
 
 
 class JiraAPI(Protocol):
-
     def __init__(self, conf) -> None:
         self.conf = conf
 
@@ -14,4 +13,3 @@ class JiraAPI(Protocol):
 
     def create_component(self, body):
         """Creates a component in a Jira project"""
-

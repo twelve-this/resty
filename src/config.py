@@ -17,6 +17,7 @@ class Paths:
     output: str
     input: str
 
+
 @dataclass
 class Config:
     endpoints: Endpoints

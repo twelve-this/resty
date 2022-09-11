@@ -6,14 +6,16 @@ endpoints:
   get_issue_by_key:
     url: /rest/api/2/issue/{key}
     verb: GET
-    additional_headers: null
-    remove_global_headers: null
-    path_parameters: null
-    query_parameters: null
+    additional_headers: {}
+    remove_global_headers: {}
+    path_parameters: {}
+    query_parameters: {}
   create_issue:
     url: /rest/api/2/issue
     verb: POST
-    additional_headers: null
-    remove_global_headers: null
-    path_parameters: null
-    query_parameters: null
+    additional_headers:
+      header2: header2_value_overridden
+      header4: header4_value
+    remove_global_headers: {}
+    path_parameters: {}
+    query_parameters: {}
