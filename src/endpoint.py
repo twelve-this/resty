@@ -1,5 +1,5 @@
 from collections import ChainMap
-from typing import Mapping
+from typing import Mapping, Optional
 
 from pydantic import BaseModel, root_validator
 
@@ -12,13 +12,23 @@ class Endpoint(BaseModel):
     global_headers: dict[str, str]
     additional_headers: dict[str, str]
     remove_global_headers: list[str]
-    path_parameters: dict[str, str]
+    path_parameters: list[str]
     query_parameters: dict[str, str]
+
+    _actual_path_parameters: Optional[dict[str, str]] = None
 
     @property
     def headers(self) -> dict[str, str]:
         headers = self.global_headers | self.additional_headers
         return self._remove_global_headers(headers)
+
+    @property
+    def ready_url(self) -> str:
+        pass
+
+    @property
+    def has_path_parameters_in_url(self) -> bool:
+        return bool(self.path_parameters)
 
     def _remove_global_headers(self, headers: dict[str, str]) -> dict[str, str]:
         if not self.global_headers:

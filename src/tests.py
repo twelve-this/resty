@@ -24,7 +24,7 @@ def endpoints_raw():
             "verb": "GET",
             "additional_headers": {},
             "remove_global_headers": [],
-            "path_parameters": {},
+            "path_parameters": ["key"],
             "query_parameters": {},
         },
         "create_issue": {
@@ -35,7 +35,7 @@ def endpoints_raw():
                 "header4": "header4_value",
             },
             "remove_global_headers": ["header3"],
-            "path_parameters": {},
+            "path_parameters": [],
             "query_parameters": {},
         },
     }
@@ -55,7 +55,7 @@ def endpoints_as_obj():
             },
             additional_headers={},
             remove_global_headers=[],
-            path_parameters={},
+            path_parameters=["key"],
             query_parameters={},
         ),
         "create_issue": Endpoint(
@@ -72,7 +72,7 @@ def endpoints_as_obj():
                 "header4": "header4_value",
             },
             remove_global_headers=['header3'],
-            path_parameters={},
+            path_parameters=[],
             query_parameters={},
         ),
     }
@@ -121,6 +121,14 @@ def test_api_spec_endpoint_headers_overridden(jira_api_spec_no_yaml, headers_ove
 
     get_issue_by_key = jira_api_spec_no_yaml.get_endpoint("get_issue_by_key")
     assert get_issue_by_key.headers == global_headers_raw
+
+def test_api_spec_endpoint_ready_url(jira_api_spec_no_yaml):
+
+    create_issue = jira_api_spec_no_yaml.get_endpoint("create_issue")
+    assert create_issue.has_path_parameters_in_url is False
+
+    get_issue_by_key = jira_api_spec_no_yaml.get_endpoint("get_issue_by_key")
+    assert get_issue_by_key.has_path_parameters_in_url is True
 
 # @pytest.mark.skip
 # def test_jira_api_spec(jira_api_spec):
