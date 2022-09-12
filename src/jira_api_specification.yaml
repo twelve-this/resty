@@ -8,7 +8,7 @@ endpoints:
     verb: GET
     additional_headers: {}
     remove_global_headers: {}
-    path_parameters: []
+    path_parameters: [key]
     query_parameters: {}
   create_issue:
     url: /rest/api/2/issue

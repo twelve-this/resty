@@ -126,9 +126,19 @@ def test_api_spec_endpoint_ready_url(jira_api_spec_no_yaml):
 
     create_issue = jira_api_spec_no_yaml.get_endpoint("create_issue")
     assert create_issue.has_path_parameters_in_url is False
+    assert create_issue.path_parameters_provided is False
+    assert create_issue._actual_path_parameters == {}
 
     get_issue_by_key = jira_api_spec_no_yaml.get_endpoint("get_issue_by_key")
     assert get_issue_by_key.has_path_parameters_in_url is True
+    assert get_issue_by_key._actual_path_parameters == {}
+    assert get_issue_by_key.path_parameters_provided is False
+
+    path_parameters = {"key": "ISSUE-1234"}
+
+    get_issue_by_key.provide_path_parameters(path_parameters)
+    assert get_issue_by_key._actual_path_parameters == path_parameters
+    assert create_issue._actual_path_parameters == {}
 
 # @pytest.mark.skip
 # def test_jira_api_spec(jira_api_spec):
