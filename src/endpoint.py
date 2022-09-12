@@ -1,7 +1,6 @@
-from collections import ChainMap
-from typing import Mapping, Optional
+from typing import Optional, Dict, List
 
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel
 
 
 class Endpoint(BaseModel):
@@ -9,17 +8,17 @@ class Endpoint(BaseModel):
     name: str
     url: str
     verb: str
-    global_headers: dict[str, str]
-    additional_headers: dict[str, str]
-    remove_global_headers: list[str]
-    path_parameters: list[str]
-    query_parameters: dict[str, str]
+    global_headers: Dict[str, str]
+    additional_headers: Dict[str, str]
+    remove_global_headers: List[str]
+    path_parameters: List[str]
+    query_parameters: Dict[str, str]
 
-    _actual_path_parameters: Optional[dict[str, str]] = None
+    _actual_path_parameters: Optional[Dict[str, str]] = None
 
     @property
-    def headers(self) -> dict[str, str]:
-        headers = self.global_headers | self.additional_headers
+    def headers(self) -> Dict[str, str]:
+        headers = {**self.global_headers, **self.additional_headers}
         return self._remove_global_headers(headers)
 
     @property
@@ -30,7 +29,7 @@ class Endpoint(BaseModel):
     def has_path_parameters_in_url(self) -> bool:
         return bool(self.path_parameters)
 
-    def _remove_global_headers(self, headers: dict[str, str]) -> dict[str, str]:
+    def _remove_global_headers(self, headers: Dict[str, str]) -> Dict[str, str]:
         if not self.global_headers:
             return headers
         return {key: value for key, value in headers.items() if key not in self.remove_global_headers}
